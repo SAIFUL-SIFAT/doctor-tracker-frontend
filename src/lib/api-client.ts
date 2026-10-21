@@ -92,26 +92,33 @@ export async function apiClient<T>(
       processQueue(refreshErr);
       isRefreshing = false;
       if (typeof window !== "undefined") {
-        window.location.href = `/login?next=${encodeURIComponent(
-          window.location.pathname + window.location.search
-        )}`;
+        window.location.assign(
+          `/login?next=${encodeURIComponent(
+            window.location.pathname + window.location.search
+          )}`
+        );
       }
       throw refreshErr;
     }
   }
 
-  let data: any = null;
+  let data: Record<string, unknown> | null = null;
   const contentType = response.headers.get("content-type");
   if (contentType && contentType.includes("application/json")) {
     try {
-      data = await response.json();
+      data = (await response.json()) as Record<string, unknown>;
     } catch {
       data = null;
     }
   }
 
   if (!response.ok) {
-    const errorPayload = data?.error;
+    const errorPayload = data?.error as {
+      message?: string;
+      code?: string;
+      details?: Array<{ field: string; message: string }>;
+      requestId?: string;
+    } | undefined;
     const message = errorPayload?.message || response.statusText || "Request failed";
     const code = errorPayload?.code || (response.status === 401 ? "UNAUTHENTICATED" : "API_ERROR");
     throw new ApiError(message, response.status, code, errorPayload?.details, errorPayload?.requestId);

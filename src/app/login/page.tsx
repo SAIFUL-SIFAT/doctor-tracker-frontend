@@ -53,9 +53,9 @@ function LoginForm() {
         description: "Successfully authenticated to ward admin.",
       });
 
-      // Force hard redirect to re-trigger middleware and bootstrap fresh auth state
-      window.location.href = next;
-    } catch (err: any) {
+      // Hard redirect to re-trigger middleware and bootstrap fresh auth state
+      window.location.assign(next);
+    } catch (err: unknown) {
       if (err instanceof ApiError) {
         setServerError(err.message);
       } else {

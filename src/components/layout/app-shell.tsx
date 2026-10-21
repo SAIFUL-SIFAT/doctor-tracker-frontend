@@ -49,8 +49,8 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <div className="min-h-screen flex bg-[var(--canvas)] text-[var(--ink)]">
-      {/* Desktop Sidebar (ink background) */}
-      <aside className="hidden lg:flex flex-col w-64 bg-[var(--ink)] text-slate-100 border-r border-slate-800 shrink-0 select-none">
+      {/* Desktop Sidebar (ink background) - Sticky viewport height so user/logout is always visible */}
+      <aside className="hidden lg:flex flex-col w-64 bg-[var(--ink)] text-slate-100 border-r border-slate-800 shrink-0 select-none sticky top-0 h-screen">
         {/* Brand */}
         <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-800/80">
           <div className="w-9 h-9 rounded-lg bg-teal-600/30 border border-teal-500/40 flex items-center justify-center text-teal-400">
@@ -195,10 +195,6 @@ export function AppShell({ children }: AppShellProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--muted-text)] bg-[var(--canvas)] px-2.5 py-1 rounded-md border border-[var(--line)]">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Database Connected</span>
-            </div>
             <div className="text-xs font-medium text-[var(--ink)]">
               {user?.name || "Admin"}
             </div>

@@ -11,8 +11,10 @@ function makeQueryClient() {
         staleTime: 30 * 1000,
         retry: (failureCount, error) => {
           // Don't retry on 401 or 404
-          const status = (error as any)?.status;
-          if (status === 401 || status === 403 || status === 404) return false;
+          if (error && typeof error === "object" && "status" in error) {
+            const status = (error as { status?: number }).status;
+            if (status === 401 || status === 403 || status === 404) return false;
+          }
           return failureCount < 2;
         },
         refetchOnWindowFocus: false,
