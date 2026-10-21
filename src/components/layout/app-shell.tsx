@@ -16,6 +16,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api-client";
+import { Doctor, Patient, PaginatedResponse } from "@/types";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -24,6 +27,7 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const queryClient = useQueryClient();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const navItems = [
@@ -73,10 +77,43 @@ export function AppShell({ children }: AppShellProps) {
           </div>
           {navItems.map((item) => {
             const Icon = item.icon;
+            const handleMouseEnter = () => {
+              if (item.href === "/doctors") {
+                queryClient.prefetchQuery({
+                  queryKey: [
+                    "doctors",
+                    {
+                      page: 1,
+                      limit: 20,
+                      sort: "-createdAt",
+                    },
+                  ],
+                  queryFn: () =>
+                    apiClient<PaginatedResponse<Doctor>>("/api/v1/doctors?page=1&limit=20&sort=-createdAt"),
+                  staleTime: 30_000,
+                });
+              } else if (item.href === "/patients") {
+                queryClient.prefetchQuery({
+                  queryKey: [
+                    "patients",
+                    {
+                      page: 1,
+                      limit: 20,
+                      sort: "-createdAt",
+                    },
+                  ],
+                  queryFn: () =>
+                    apiClient<PaginatedResponse<Patient>>("/api/v1/patients?page=1&limit=20&sort=-createdAt"),
+                  staleTime: 30_000,
+                });
+              }
+            };
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                onMouseEnter={handleMouseEnter}
                 className={`relative flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   item.active
                     ? "bg-[var(--teal-soft)]/15 text-teal-300 font-semibold"

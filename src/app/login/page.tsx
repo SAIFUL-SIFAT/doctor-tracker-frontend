@@ -53,8 +53,8 @@ function LoginForm() {
         description: "Successfully authenticated to ward admin.",
       });
 
-      // Hard redirect to re-trigger middleware and bootstrap fresh auth state
-      window.location.assign(next);
+      router.replace(next);
+      router.refresh();
     } catch (err: unknown) {
       if (err instanceof ApiError) {
         setServerError(err.message);
