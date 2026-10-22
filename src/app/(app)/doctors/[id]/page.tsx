@@ -248,6 +248,9 @@ function DoctorDetailContent() {
     },
     {
       accessorKey: "createdAt",
+      meta: {
+        className: "hidden lg:table-cell",
+      },
       header: () => (
         <button
           type="button"

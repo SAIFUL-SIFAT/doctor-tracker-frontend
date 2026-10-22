@@ -194,22 +194,22 @@ function PatientsContent() {
     switch (st) {
       case "active":
         return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-800 dark:text-emerald-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-600" />
             Active
           </span>
         );
       case "follow_up":
         return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-800">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-amber-800 dark:text-amber-300">
+            <span className="w-2 h-2 rounded-full bg-amber-600" />
             Follow-up
           </span>
         );
       case "discharged":
         return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-400">
+            <span className="w-2 h-2 rounded-full bg-slate-400" />
             Discharged
           </span>
         );
@@ -267,12 +267,9 @@ function PatientsContent() {
         cell: ({ row }) => {
           const cond = row.original.condition;
           return (
-            <Badge
-              variant="outline"
-              className={`text-xs font-medium border ${getConditionColor(cond)}`}
-            >
+            <span className="text-xs font-normal text-[var(--ink)]">
               {cond}
-            </Badge>
+            </span>
           );
         },
       },
@@ -323,6 +320,9 @@ function PatientsContent() {
       },
       {
         accessorKey: "createdAt",
+        meta: {
+          className: "hidden lg:table-cell",
+        },
         header: () => (
           <button
             onClick={() => handleSortToggle("createdAt")}

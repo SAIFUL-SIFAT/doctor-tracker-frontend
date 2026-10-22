@@ -90,8 +90,8 @@ export function SpecializationsBreakdown({
         </span>
       </div>
 
-      <div className="space-y-3.5 pt-4 flex-1 overflow-y-auto pr-1">
-        {data.map((item) => {
+      <div className="space-y-3 pt-4 flex-1">
+        {data.slice(0, 10).map((item) => {
           const percentage = totalDoctors > 0 ? ((item.count / totalDoctors) * 100).toFixed(1) : "0";
           const barWidth = (item.count / maxCount) * 100;
 

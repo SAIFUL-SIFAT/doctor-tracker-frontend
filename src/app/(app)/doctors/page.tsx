@@ -201,6 +201,9 @@ function DoctorsContent() {
     {
       accessorKey: "hospital",
       header: "Hospital",
+      meta: {
+        className: "hidden xl:table-cell",
+      },
       cell: ({ row }) => {
         return (
           <div className="text-xs text-[var(--ink)] flex items-center gap-1.5 max-w-[200px] truncate">
@@ -213,6 +216,9 @@ function DoctorsContent() {
     {
       accessorKey: "phone",
       header: "Phone",
+      meta: {
+        className: "hidden lg:table-cell",
+      },
       cell: ({ row }) => {
         return (
           <span className="text-xs text-[var(--muted-text)] font-mono">
@@ -256,6 +262,9 @@ function DoctorsContent() {
     },
     {
       accessorKey: "createdAt",
+      meta: {
+        className: "hidden lg:table-cell",
+      },
       header: () => (
         <button
           type="button"

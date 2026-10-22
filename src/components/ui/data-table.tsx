@@ -158,19 +158,22 @@ export function DataTable<TData, TValue>({
                 <TableHeader className="bg-[var(--canvas)]/60">
                   {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id} className="border-b border-[var(--line)] hover:bg-transparent">
-                      {headerGroup.headers.map((header) => (
-                        <TableHead
-                          key={header.id}
-                          className="h-10 text-xs font-semibold text-[var(--muted-text)] tracking-wider uppercase px-4"
-                        >
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </TableHead>
-                      ))}
+                      {headerGroup.headers.map((header) => {
+                        const metaClass = (header.column.columnDef.meta as { className?: string })?.className || "";
+                        return (
+                          <TableHead
+                            key={header.id}
+                            className={`h-10 text-xs font-semibold text-[var(--muted-text)] tracking-wider uppercase px-4 ${metaClass}`}
+                          >
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                          </TableHead>
+                        );
+                      })}
                     </TableRow>
                   ))}
                 </TableHeader>
@@ -181,11 +184,14 @@ export function DataTable<TData, TValue>({
                       data-state={row.getIsSelected() && "selected"}
                       className="h-[52px] border-b border-[var(--line)]/60 hover:bg-[var(--teal-soft)]/20 transition-colors"
                     >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id} className="px-4 py-2.5 text-sm text-[var(--ink)]">
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </TableCell>
-                      ))}
+                      {row.getVisibleCells().map((cell) => {
+                        const metaClass = (cell.column.columnDef.meta as { className?: string })?.className || "";
+                        return (
+                          <TableCell key={cell.id} className={`px-4 py-2.5 text-sm text-[var(--ink)] ${metaClass}`}>
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </TableCell>
+                        );
+                      })}
                     </TableRow>
                   ))}
                 </TableBody>

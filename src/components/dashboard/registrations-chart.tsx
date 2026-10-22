@@ -94,7 +94,11 @@ export function RegistrationsChart({
   }
 
   return (
-    <div className="p-6 rounded-xl border border-[var(--line)] bg-[var(--surface)] h-full flex flex-col">
+    <div
+      className="p-6 rounded-xl border border-[var(--line)] bg-[var(--surface)] h-full flex flex-col"
+      role="region"
+      aria-label="Patient registrations daily trend and 7-day rolling average chart"
+    >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--line)] gap-2">
         <div>
           <h3 className="font-heading font-semibold text-base text-[var(--ink)] flex items-center gap-2">
@@ -117,7 +121,28 @@ export function RegistrationsChart({
         </div>
       </div>
 
-      <div className="h-64 sm:h-72 w-full pt-4">
+      {/* Visually hidden accessible data table fallback per DESIGN.md §8 */}
+      <table className="sr-only">
+        <caption>Patient registrations data</caption>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Count</th>
+            <th scope="col">7-Day Average</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chartData.map((d) => (
+            <tr key={d.date}>
+              <td>{d.date}</td>
+              <td>{d.count}</td>
+              <td>{d.movingAvg}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="h-64 sm:h-72 w-full pt-4" aria-hidden="true">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
