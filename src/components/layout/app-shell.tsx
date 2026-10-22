@@ -65,8 +65,8 @@ export function AppShell({ children }: AppShellProps) {
       <aside className="hidden lg:flex flex-col w-64 bg-[var(--ink)] text-slate-100 border-r border-slate-800 shrink-0 select-none fixed inset-y-0 left-0 z-30 h-screen" aria-label="Sidebar navigation">
         {/* Brand */}
         <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-800/80 shrink-0">
-          <div className="w-9 h-9 rounded-lg bg-teal-600/30 border border-teal-500/40 flex items-center justify-center text-teal-400">
-            <Activity className="w-5 h-5" />
+          <div className="w-9 h-9 rounded-lg bg-teal-600/20 border border-teal-500/30 flex items-center justify-center p-1.5 shrink-0">
+            <img src="/logo.svg" alt="Doctor Tracker Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <div className="font-heading font-semibold text-base leading-tight tracking-tight text-white">
@@ -193,7 +193,9 @@ export function AppShell({ children }: AppShellProps) {
                 className="w-64 bg-[var(--ink)] text-slate-100 p-0 border-r border-slate-800"
               >
                 <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-800">
-                  <Activity className="w-5 h-5 text-teal-400" />
+                  <div className="w-8 h-8 rounded-lg bg-teal-600/20 border border-teal-500/30 flex items-center justify-center p-1 shrink-0">
+                    <img src="/logo.svg" alt="Doctor Tracker Logo" className="w-full h-full object-contain" />
+                  </div>
                   <div className="font-heading font-semibold text-base text-white">
                     Doctor Tracker
                   </div>

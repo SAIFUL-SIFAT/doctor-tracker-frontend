@@ -74,8 +74,8 @@ function LoginForm() {
       <div className="w-full max-w-md space-y-6">
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--ink)] text-white shadow-sm ring-4 ring-teal-500/10">
-            <Activity className="w-6 h-6 text-teal-400 animate-pulse" />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--ink)] shadow-md ring-4 ring-teal-500/10 p-2.5">
+            <img src="/logo.svg" alt="Doctor Tracker Logo" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-[var(--ink)] font-heading">
             Doctor Tracker

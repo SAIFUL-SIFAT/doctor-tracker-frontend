@@ -20,6 +20,16 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "Doctor Tracker — Clinical Ward Administration",
   description: "Real-time doctor patient load, tracking, and clinical analytics",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
